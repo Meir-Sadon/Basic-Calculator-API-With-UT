@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Calculator API
+  description: API for performing basic arithmetic operations and user authentication
+  version: 1.0.0
+servers:
+- url: "https://localhost:{port}"
+  variables:
+    port:
+      default: "5000"
+      enum:
+      - "5000"
+      - "5001"
+tags:
+- name: CalculatorController
+  description: Performing arithmetic operations
+- name: AuthController
+  description: Used for user authentication
+paths:
+  /calculate:
+    post:
+      tags:
+      - CalculatorController
+      summary: Perform a calculation
+      operationId: calculate
+      parameters:
+      - name: Math-Operator
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Plus
+          - Minus
+          - Multiple
+          - Divide
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalcRequest'
+        required: true
+      responses:
+        "200":
+          description: Calculation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalcResponse'
+          examples:
+            example-1:
+              value:
+                CalcResult: 15.0
+        "400":
+          description: Invalid input
+  /login:
+    post:
+      tags:
+      - AuthController
+      summary: User login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+          examples:
+            example-1:
+              value:
+                Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        "401":
+          description: Unauthorized
+components:
+  schemas:
+    CalcRequest:
+      required:
+      - Number1
+      - Number2
+      type: object
+      properties:
+        Number1:
+          type: number
+          format: double
+          description: The first number for the calculation
+          example: 10.0
+        Number2:
+          type: number
+          format: double
+          description: The second number for the calculation
+          example: 5.0
+    CalcResponse:
+      type: object
+      properties:
+        CalcResult:
+          type: number
+          format: double
+          description: The result of the calculation
+          example: 15.0
+    LoginRequest:
+      required:
+      - Password
+      - Username
+      type: object
+      properties:
+        Username:
+          type: string
+          description: The username of the user
+          example: "user1"
+        Password:
+          type: string
+          description: The password of the user
+          example: "password123"
+    LoginResponse:
+      type: object
+      properties:
+        Token:
+          type: string
+          description: The JWT token for the authenticated user
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
