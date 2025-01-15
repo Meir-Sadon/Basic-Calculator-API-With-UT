@@ -3,7 +3,7 @@
 
 @echo off
 
-dotnet restore src\Calculator_MatrixJobExam
-dotnet build src\Calculator_MatrixJobExam
-echo Now, run the following to start the project: dotnet run -p src\Calculator_MatrixJobExam\Calculator_MatrixJobExam.csproj --launch-profile web.
+dotnet restore Calculator_MatrixJobExam
+dotnet build Calculator_MatrixJobExam
+echo Now, run the following to start the project: dotnet run -p Calculator_MatrixJobExam\Calculator_MatrixJobExam.csproj --launch-profile web.
 echo.

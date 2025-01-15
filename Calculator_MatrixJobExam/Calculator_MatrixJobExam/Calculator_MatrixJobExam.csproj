@@ -10,7 +10,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>58950dd8-f20d-446b-8690-b169bed56292</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />

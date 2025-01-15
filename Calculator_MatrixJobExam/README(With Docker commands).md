@@ -20,6 +20,6 @@ build.bat
 
 ```
 cd ./Calculator_MatrixJobExam
-docker build -t calculator_matrixjobexam .
-docker run -p 5000:5000 calculator_matrixjobexam
+docker build -t calculator .
+docker run -p 5000:5000 calculator
 ```

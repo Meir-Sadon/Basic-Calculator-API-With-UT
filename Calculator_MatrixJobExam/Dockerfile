@@ -13,19 +13,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["NuGet.Config", "."]
-COPY ["Calculator_MatrixJobExam.csproj", "Calculator_MatrixJobExam/"]
+COPY ["Calculator_MatrixJobExam/Calculator_MatrixJobExam.csproj", "Calculator_MatrixJobExam/"]
 RUN dotnet restore "./Calculator_MatrixJobExam/Calculator_MatrixJobExam.csproj"
 COPY . .
 WORKDIR "/src/Calculator_MatrixJobExam"
-RUN dotnet build "Calculator_MatrixJobExam.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Calculator_MatrixJobExam.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Calculator_MatrixJobExam.csproj" -c $BUILD_CONFIGURATION -o /app/publish --self-contained true -r win-x64
+RUN dotnet publish "./Calculator_MatrixJobExam.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "./Calculator_MatrixJobExam.dll"]
+ENTRYPOINT ["dotnet", "Calculator_MatrixJobExam.dll"]
