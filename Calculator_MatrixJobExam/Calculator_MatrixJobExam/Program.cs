@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));//Allow to send enum names instead the values
 
-builder.Services.AddJWTAuthorization(builder.Configuration);
+builder.Services.AddJWTAuthentication(builder.Configuration);
 
 builder.Services
     .AddMvc(options =>
