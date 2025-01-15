@@ -1,6 +1,7 @@
 using Calculator_MatrixJobExam.Attributes;
 using Calculator_MatrixJobExam.Enums;
 using Calculator_MatrixJobExam.Models.CalculatorObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,6 +12,7 @@ namespace Calculator_MatrixJobExam.Controllers
     /// <summary>
     /// Controller for performing calculations.
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CalculatorController : ControllerBase, ICalculatorController
@@ -25,7 +27,7 @@ namespace Calculator_MatrixJobExam.Controllers
         /// <response code="400">Cannot divide by zero</response>
         /// <response code="400">Unsupported operator</response>
         [HttpPost]
-        [Route("/calculate")]
+        [Route("calculate")]
         [ValidateModelState]
         [SwaggerOperation("Calculate")]
         [SwaggerResponse(statusCode: 200, type: typeof(CalcResponse), description: "Calculation result")]

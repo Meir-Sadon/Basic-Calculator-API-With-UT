@@ -19,7 +19,7 @@ build.bat
 ## Run in Docker
 
 ```
-cd ./Calculator_MatrixJobExam
+cd ./Basic-Calculator-API-With-UT/Calculator_MatrixJobExam
 docker build -t calculator .
 docker run -p 5000:5000 calculator
 ```

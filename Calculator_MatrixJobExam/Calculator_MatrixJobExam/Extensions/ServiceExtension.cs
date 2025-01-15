@@ -14,7 +14,7 @@ namespace Calculator_MatrixJobExam.Extensions
         /// </summary>
         /// <param name="services">The service collection to add the authentication services to.</param>
         /// <param name="configuration">The configuration manager to retrieve JWT settings from.</param>
-        internal static void AddJWTAuthorization(this IServiceCollection services, ConfigurationManager configuration)
+        internal static void AddJWTAuthentication(this IServiceCollection services, ConfigurationManager configuration)
         {
             ArgumentNullException.ThrowIfNull(configuration);
             string? secretKey = configuration["Jwt:SecretKey"];

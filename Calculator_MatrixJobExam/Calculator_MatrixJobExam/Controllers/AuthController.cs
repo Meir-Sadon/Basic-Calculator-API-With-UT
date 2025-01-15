@@ -33,7 +33,7 @@ namespace Calculator_MatrixJobExam.Controllers
         /// <response code="401">Unauthorized</response>
         /// <response code="500">Internal server error: Secret key is not configured</response>
         [HttpPost]
-        [Route("/login")]
+        [Route("login")]
         [ValidateModelState]
         [SwaggerOperation("Login")]
         [SwaggerResponse(statusCode: 200, type: typeof(LoginResponse), description: "Successful login")]
